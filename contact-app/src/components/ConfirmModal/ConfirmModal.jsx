@@ -14,8 +14,8 @@ const ConfirmModal = ({ open, close, title, message, callback, withIcon }) => {
 
     return (
         <div className="ConfirmModal" hidden={!open}>
-            <div className="textWrapper">          
-                <h5>{withIcon === true ? <span><ImWarning/></span> : '' }{title}</h5>
+            <div className="textWrapper">
+                <h5>{withIcon === true ? <span><ImWarning /></span> : ''}{title}</h5>
                 <p>{message}</p>
             </div>
             <div className="buttonWrapper">

@@ -14,11 +14,11 @@ const ContactList = () => {
 
   const dispatch = useDispatch();
   const { searchInput } = useSelector((state) => state.searchInput);
-  const { contacts } = useSelector((state) => state.contacts);
+  const { contacts,favoritesContacts } = useSelector((state) => state.contacts);
   const [filteredContacts, setFilteredContacts] = useState(contacts);
   const [deletedID, setDeletedID] = useState("");
   const [showModal, setShowModal] = useState(false);
-  
+
   useEffect(() => {
     setFilteredContacts(contacts);
   }, [contacts])
@@ -47,6 +47,12 @@ const ContactList = () => {
     dispatch(deleteContact(deletedID))
   }
 
+  const isInFavorites = (id) => {
+    const aa = !!favoritesContacts.find(item => item.id === id)
+    console.log(aa)
+    return aa;
+  };
+
   return (
     <div className="ContactList">
       <div>
@@ -70,13 +76,13 @@ const ContactList = () => {
                 <td>{contact.phone}</td>
                 <td>
                   <span>
-                    <button onClick={() => dispatch(addContactToFavorites({id:contact.id,name:contact.name,email:contact.email,phone:contact.phone}))}><AiOutlineStar size={20}/></button>
+                    <button onClick={() => dispatch(addContactToFavorites({ id: contact.id, name: contact.name, email: contact.email, phone: contact.phone }))}><AiOutlineStar size={20} style={{color: isInFavorites(contact.id) ? 'yellow' : 'inherit'}}/></button>
                   </span>
                   <span>
-                    <button onClick={() => deleteHandler(contact.id)}><RiDeleteBin6Line size={20}/></button>
+                    <button onClick={() => deleteHandler(contact.id)}><RiDeleteBin6Line size={20} /></button>
                   </span>
                   <span>
-                    <Link to={`/edit/${contact.id}`}><FiEdit2 size={20}/></Link>
+                    <Link to={`/edit/${contact.id}`}><FiEdit2 size={20} /></Link>
                   </span>
                 </td>
               </tr>
@@ -84,7 +90,7 @@ const ContactList = () => {
           }
         </tbody>
       </table>
-      <ConfirmModal open={showModal} close={setShowModal} title="Delete contact" message="Are you sure you want to delete this contact?" callback={deleteModalCallBack} withIcon={true}/>
+      <ConfirmModal open={showModal} close={setShowModal} title="Delete contact" message="Are you sure you want to delete this contact?" callback={deleteModalCallBack} withIcon={true} />
     </div>
   )
 }

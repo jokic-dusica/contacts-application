@@ -8,7 +8,7 @@ import { FiEdit2 } from 'react-icons/fi';
 
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 
-import { deleteContactFromFavorites }  from '../../redux/slices/contact';
+import { deleteContactFromFavorites } from '../../redux/slices/contact';
 
 const FavoritesContactsList = () => {
 
@@ -28,7 +28,7 @@ const FavoritesContactsList = () => {
 
   return (
     <div className="Home FavoritesContactsList">
-       <div>
+      <div>
         <h2>Favorites</h2>
       </div>
       <table className="wrapperTable">
@@ -48,10 +48,10 @@ const FavoritesContactsList = () => {
                 <td>{favContact.email}</td>
                 <td>{favContact.phone}</td>
                 <td>
-                  <span><button><AiOutlineStar /></button></span>
-                  <span><button onClick={() => deleteHandler(favContact.id)}><RiDeleteBin6Line size={20}/></button></span>
+                  <span><button onClick={() => deleteHandler(favContact.id)}><AiOutlineStar style={{color:"yellow"}}/></button></span>
+                  <span><button onClick={() => deleteHandler(favContact.id)}><RiDeleteBin6Line size={20} /></button></span>
                   <span>
-                    <Link to={`/edit/${favContact.id}`}><FiEdit2 size={20}/></Link>
+                    <Link to={`/edit/${favContact.id}`}><FiEdit2 size={20} /></Link>
                   </span>
                 </td>
               </tr>
@@ -59,7 +59,7 @@ const FavoritesContactsList = () => {
           }
         </tbody>
       </table>
-      <ConfirmModal open={showModal} close={setShowModal} title="Delete contact" message="Are you sure you want to delete this contact from Favorites?" callback={deleteModalCallBack} withIcon={true}/>
+      <ConfirmModal open={showModal} close={setShowModal} title="Delete contact" message="Are you sure you want to delete this contact from Favorites?" callback={deleteModalCallBack} withIcon={true} />
     </div>
   )
 }

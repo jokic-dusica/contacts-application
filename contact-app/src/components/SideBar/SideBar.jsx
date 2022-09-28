@@ -7,11 +7,12 @@ import { AiOutlineStar, AiOutlinePlus } from 'react-icons/ai';
 
 import './SideBar.scss';
 
-
 const SideBar = () => {
 
   const { contacts } = useSelector((state) => state.contacts);
   const { favoritesContacts } = useSelector((state) => state.contacts);
+  const { labels } = useSelector((state) => state.labels);
+  console.log("Labels", Array.isArray(labels))
 
   return (
     <nav className="SideBar">
@@ -24,17 +25,22 @@ const SideBar = () => {
           </div>
           <span className="mainTitle">Contacts</span>
         </div>
-        <div className="btnWrapper">
-          <Link to="/add" className="">      
-            <span><AiOutlinePlus size={15}/></span>Create Contact
+        <div className="submitBtn">
+          <Link to="/add" className="">
+            <span><AiOutlinePlus size={15} /></span>Create Contact
           </Link>
-        </div>     
+        </div>
         <div className="sidebarMenu">
           <ul>
-            <Link to="/"><li><RiContactsLine size={18}/> Contacts <span>{contacts.length}</span></li></Link>
+            <Link to="/"><li><RiContactsLine size={18} /> Contacts <span>{contacts.length}</span></li></Link>
             <Link to="/favoritesContacts"><li><AiOutlineStar size={18} /> Favorites <span>{favoritesContacts.length}</span></li></Link>
           </ul>
           <div>Labels</div>
+          <ul>
+            {labels.map((label, i) => (
+              <li key={"label" + i}>{label.label}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </nav>

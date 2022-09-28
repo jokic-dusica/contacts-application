@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { useDispatch } from 'react-redux';
 
-import {setSearchInput} from '../../redux/slices/searchInput';
+import { setSearchInput } from '../../redux/slices/searchInput';
 
 import './Header.scss';
 
@@ -18,9 +18,9 @@ const Header = () => {
     return (
         <div className="Header">
             <div className="wrapperHeader">
-                <HiOutlineSearch size={20}/>
-                <input type="text" name="search" value={searchValue} onChange={(e)=>setSearchValue(e.target.value)} placeholder="Search"/>
-            </div>    
+                <HiOutlineSearch size={20} />
+                <input type="text" name="search" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Search" />
+            </div>
         </div>
     )
 }
