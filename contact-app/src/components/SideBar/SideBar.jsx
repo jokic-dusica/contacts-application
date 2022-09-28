@@ -1,45 +1,42 @@
-import React from 'react'
 import logo from '../../assets/logo.png'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 
 import { RiContactsLine } from 'react-icons/ri';
-import { AiOutlineStar } from 'react-icons/ai';
+import { AiOutlineStar, AiOutlinePlus } from 'react-icons/ai';
+
 import './SideBar.scss';
 
 
 const SideBar = () => {
 
-  const {contacts} = useSelector((state) => state.contacts);
+  const { contacts } = useSelector((state) => state.contacts);
+  const { favoritesContacts } = useSelector((state) => state.contacts);
+
   return (
-    <nav className="wrapper">
-        {/* <Link to="/" className = "navbar-logo">Contact App</Link>
-        <Link to="/" className = "">Create Contact</Link>
-        <Link to="/" className = "">Favorites</Link> */}
+    <nav className="SideBar">
+      <div className="wrapper">
         <div>
-          <div className="">
-                <div className="logoWrapper">
-                  <Link to="/" >               
-                    <img src={logo} alt='Not found'/>
-                  </Link>
-                </div> 
-                <span>Contacts</span>
-          </div>                            
-            <Link to="/add" className = "">
-              <div className="btnWrapper">
-                Create Contact 
-              </div>                            
+          <div className="logoWrapper">
+            <Link to="/" >
+              <img src={logo} alt='Not found' />
             </Link>
-          
-          <div className = "sidebarMenu">
-            <div>
-              <ul>
-                <li><RiContactsLine/> Contacts {contacts.length}</li>
-                <li><AiOutlineStar/> Favorites</li>
-              </ul>
-            </div>
           </div>
-        </div>      
+          <span className="mainTitle">Contacts</span>
+        </div>
+        <div className="btnWrapper">
+          <Link to="/add" className="">      
+            <span><AiOutlinePlus size={15}/></span>Create Contact
+          </Link>
+        </div>     
+        <div className="sidebarMenu">
+          <ul>
+            <Link to="/"><li><RiContactsLine size={18}/> Contacts <span>{contacts.length}</span></li></Link>
+            <Link to="/favoritesContacts"><li><AiOutlineStar size={18} /> Favorites <span>{favoritesContacts.length}</span></li></Link>
+          </ul>
+          <div>Labels</div>
+        </div>
+      </div>
     </nav>
   )
 }

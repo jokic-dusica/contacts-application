@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { addContact } from '../../redux/slices/contact';
+
+import './CreateContact.scss';
 
 const CreateContact = () => {
 
@@ -26,11 +28,10 @@ const CreateContact = () => {
   };
 
   return (
-    <div className="mainWrapper">
-      <h1>Create Contact</h1>
+    <div className="Home CreateContact">
+      <h2>Create Contact</h2>
       <div className="form-group">
         <label>Upload Photo</label>
-
       </div>
       <div className="form-group">
         <input type="text" placeholder="Name" className="form-control" value={formState.name} name="name" onChange={onChangeHandler} />
@@ -42,8 +43,8 @@ const CreateContact = () => {
         <input type="number" placeholder="Phone number" className="form-control" value={formState.phone} name="phone" onChange={onChangeHandler} />
       </div>
       <div className="form-group">
-        <button className="form-control" onClick={createNewContact}>Create</button>
-        <Link to="/">Cancel</Link>
+        <Link to="/"><button>Cancel</button></Link>
+        <button className="btnWrapper" onClick={createNewContact}>Create</button>     
       </div>
     </div>
   )

@@ -1,22 +1,30 @@
-/* * {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+* {
+    //margin: 0;
+    //padding: 0;
+    //list-style: none;
     text-decoration: none;
+    font-family: 'Inter', sans-serif;
 }
 
 .wrapper {
     position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
+    height: 100%;
     width: 350px;
-    background-color: yellow;
+    background: #E5E7EB
+}
+
+.mainTitle {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 18px;
+    color: black;
 }
 
 .logoWrapper {
     width: 70px;
     height: 70px;
+    display: inline-block;
+    margin: 20px 20px;
 }
 
 .logoWrapper img {
@@ -25,6 +33,58 @@
 }
 
 .btnWrapper {
-    padding: 20px 20px;
+    padding: 10px 15px;
     background-color: #4F46E5;
-} */
+    font-size: 12px;
+    display: inline-block;
+    border-radius: 5px;
+    margin-left: 20px;
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: white;
+    }
+
+    span {
+        width: 15px;
+        height: 15px;
+        padding: 10px 5px 10px 5px;
+    }
+} 
+
+.sidebarMenu {
+    padding: 20px;
+
+    ul {
+        list-style: none;
+        text-decoration: none;
+        padding: 0px;      
+    }
+
+    ul a {
+        text-decoration: none;
+        color: #111827;
+    }
+
+    li {
+        padding: 10px 10px;
+    }
+
+    li:hover {
+        background-color:#F3F4F6;
+        border-radius: 5px;
+    }
+
+    span {
+        width: 35px;
+        height: 25px;
+        background: white;
+        padding: 0px 15px 15px 12px;
+        border-radius: 5px;
+        float: right;
+    }
+}
