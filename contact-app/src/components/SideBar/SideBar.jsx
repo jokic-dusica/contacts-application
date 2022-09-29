@@ -56,7 +56,7 @@ const SideBar = () => {
               <Link to={"/contactByLabel/"+label.label} key={"label" + i}><li>{label.label} {contactPerLabel(label.label)}</li></Link>
             ))}
           </ul>
-          <button onClick={() => createLabelHandler()}><AiOutlinePlus size={15} />Create Label</button>
+          <button className="create-label-btn" onClick={() => createLabelHandler()}><AiOutlinePlus size={15} />Create Label</button>
         </div>
         <InputModal open={showModal} close={setShowModal} title="Create Label" callback={createLabelCallBack} />
     </aside>
