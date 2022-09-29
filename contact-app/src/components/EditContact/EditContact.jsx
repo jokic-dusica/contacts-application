@@ -8,7 +8,7 @@ import './EditContact.scss';
 
 const EditContact = () => {
 
-  const { id } = useParams();
+  const { id, referer } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { contacts } = useSelector(state => state.contacts);
@@ -17,17 +17,13 @@ const EditContact = () => {
     id: "",
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    labels: []
   });
 
   useEffect(() => {
     if (editTarget) {
-      setFormState({
-        id: editTarget.id,
-        name: editTarget.name,
-        email: editTarget.email,
-        phone: editTarget.phone
-      })
+      setFormState(editTarget)
     }
   }, [editTarget])
 
@@ -38,8 +34,8 @@ const EditContact = () => {
 
   const editedTarget = (e) => {
     e.preventDefault();
-    dispatch(editContact({ id: editTarget.id, name: formState.name, email: formState.email, phone: formState.phone }));
-    navigate("/")
+    dispatch(editContact(formState));
+    navigate(-1)
   }
 
   return (

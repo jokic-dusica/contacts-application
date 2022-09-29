@@ -8,6 +8,7 @@ const initialState = {
             email: "johndoe@gmail.com",
             phone: "9988998899",
             img: "1",
+            labels: ["Work"]
         },
         {
             id: 1,
@@ -15,6 +16,7 @@ const initialState = {
             email: "robertdoe@gmail.com",
             phone: "1111111",
             img: "2",
+            labels: ["Friends"]
         },
         {
             id: 2,
@@ -22,31 +24,18 @@ const initialState = {
             email: "martindoe@gmail.com",
             phone: "5555555",
             img: "3",
+            labels: ["Family"]
         },
         {
             id: 3,
             name: "Christine Doe",
             email: "christinedoe@gmail.com",
             phone: "44444444",
-            img: "4"
+            img: "4",
+            labels: ["TestLabel"]
         },
     ],
-    favoritesContacts: [
-        {
-            id: 3,
-            name: "Test Favorites",
-            email: "testFav@gmail.com",
-            phone: "067876543",
-            img: "1"
-        },
-        {
-            id: 2,
-            name: "Test Favorites 1",
-            email: "testFav@gmail.com",
-            phone: "067876543",
-            img: "1"
-        },
-    ]
+    favoritesContacts: [2,3]
 };
 
 export const contactSlice = createSlice({
@@ -64,19 +53,21 @@ export const contactSlice = createSlice({
             const newDeleted = state.contacts.filter(contact => contact.id !== action.payload);
             state.contacts = newDeleted;
         },
-        addContactToFavorites: (state, action) => {
-            console.log("State fav", current(state.favoritesContacts))
-            state.favoritesContacts.push(action.payload)
-            // const data = state.favoritesContacts.find(item => item.id === action.payload);
-            // state.favoritesContacts = data;
+        addRemoveContactFromFavorites: (state, action) => {
+            const exist = state.favoritesContacts.includes(action.payload);
+            if(exist) {
+                state.favoritesContacts = state.favoritesContacts.filter(favID => favID !== action.payload)
+            } else {
+                state.favoritesContacts.push(action.payload)
+            }
         },
         deleteContactFromFavorites: (state, action) => {
-            const deletedContact = state.favoritesContacts.filter(item => item.id !== action.payload);
+            const deletedContact = state.favoritesContacts.filter(favID => favID !== action.payload);
             state.favoritesContacts = deletedContact;
-        }
+        },
     },
 })
 
-export const { addContact, editContact, deleteContact, addContactToFavorites, deleteContactFromFavorites } = contactSlice.actions
+export const { addContact, editContact, deleteContact, addRemoveContactFromFavorites, deleteContactFromFavorites } = contactSlice.actions
 
 export default contactSlice.reducer;

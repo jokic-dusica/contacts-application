@@ -15,7 +15,8 @@ const FavoritesContactsList = () => {
   const dispatch = useDispatch();
   const [deletedID, setDeletedID] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const { favoritesContacts } = useSelector((state) => state.contacts);
+  const { favoritesContacts,contacts } = useSelector((state) => state.contacts);
+  const favoriteList = contacts.filter(contact => favoritesContacts.includes(contact.id));
 
   const deleteHandler = (id) => {
     setDeletedID(id);
@@ -27,7 +28,7 @@ const FavoritesContactsList = () => {
   }
 
   return (
-    <div className="Home FavoritesContactsList">
+    <div className="ContactList">
       <div>
         <h2>Favorites</h2>
       </div>
@@ -42,13 +43,13 @@ const FavoritesContactsList = () => {
         </thead>
         <tbody>
           {
-            favoritesContacts.map((favContact, id) => (
+            favoriteList.map((favContact, id) => (
               <tr key={id}>
                 <td><img src={`/avatars/${favContact.img}.png`} />{favContact.name}</td>
                 <td>{favContact.email}</td>
                 <td>{favContact.phone}</td>
                 <td>
-                  <span><button onClick={() => deleteHandler(favContact.id)}><AiOutlineStar style={{color:"yellow"}}/></button></span>
+                  <span><button onClick={() => deleteHandler(favContact.id)}><AiOutlineStar style={{color:"red"}}/></button></span>
                   <span><button onClick={() => deleteHandler(favContact.id)}><RiDeleteBin6Line size={20} /></button></span>
                   <span>
                     <Link to={`/edit/${favContact.id}`}><FiEdit2 size={20} /></Link>

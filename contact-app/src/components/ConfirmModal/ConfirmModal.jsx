@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ImWarning } from 'react-icons/im';
 
 import './ConfirmModal.scss';
@@ -8,6 +9,7 @@ const ConfirmModal = ({ open, close, title, message, callback, withIcon }) => {
         callback();
         close(false)
     }
+
     const handleNo = () => {
         close(false)
     }

@@ -16,12 +16,10 @@ const Header = () => {
     }, [searchValue])
 
     return (
-        <div className="Header">
-            <div className="wrapperHeader">
-                <HiOutlineSearch size={20} />
-                <input type="text" name="search" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Search" />
-            </div>
-        </div>
+        <header className="Header">
+            <HiOutlineSearch size={20} />
+            <input type="text" name="search" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Search" />
+        </header>
     )
 }
 

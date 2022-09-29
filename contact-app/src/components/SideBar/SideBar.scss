@@ -6,11 +6,12 @@
     font-family: 'Inter', sans-serif;
 }
 
-.wrapper {
-    position: fixed;
+.SideBar {
     height: 100%;
-    width: 350px;
-    background: #E5E7EB
+    width: 30%;
+    max-width: 300px;
+    min-width: 250px;
+    background: #E5E7EB;
 }
 
 .mainTitle {
@@ -65,28 +66,28 @@
         list-style: none;
         text-decoration: none;
         padding: 0px;
-    }
 
-    ul a {
-        text-decoration: none;
-        color: #111827;
-    }
+        a {
+            text-decoration: none;
+            color: #111827;
+        }
 
-    li {
-        padding: 10px 10px;
-    }
+        li {
+            padding: 10px 10px;
 
-    li:hover {
-        background-color: #F3F4F6;
-        border-radius: 5px;
-    }
+            &:hover {
+                background-color: #F3F4F6;
+                border-radius: 5px;
+            }
 
-    span {
-        width: 35px;
-        height: 25px;
-        background: white;
-        padding: 0px 15px 15px 12px;
-        border-radius: 5px;
-        float: right;
+            span {
+                width: 35px;
+                height: 25px;
+                background: white;
+                padding: 0px 15px 15px 12px;
+                border-radius: 5px;
+                float: right;
+            }
+        }
     }
 }

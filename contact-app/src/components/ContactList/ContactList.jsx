@@ -6,7 +6,7 @@ import { AiOutlineStar } from 'react-icons/ai';
 import { FiEdit2 } from 'react-icons/fi';
 
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
-import { deleteContact, addContactToFavorites } from '../../redux/slices/contact'
+import { deleteContact, addRemoveContactFromFavorites } from '../../redux/slices/contact'
 
 import './ContactList.scss'
 
@@ -34,7 +34,7 @@ const ContactList = () => {
 
   const filteredUsers = () => {
     setFilteredContacts(contacts.filter((user) =>
-      user.name.toLowerCase().includes(searchInput.toLowerCase())
+      user.name.toLowerCase().includes(searchInput.toLowerCase()) || user.email.toLowerCase().includes(searchInput.toLowerCase()) || user.phone.toLowerCase().includes(searchInput.toLowerCase())
     ))
   }
 
@@ -48,13 +48,11 @@ const ContactList = () => {
   }
 
   const isInFavorites = (id) => {
-    const aa = !!favoritesContacts.find(item => item.id === id)
-    console.log(aa)
-    return aa;
+    return favoritesContacts.includes(id);
   };
 
   return (
-    <div className="ContactList">
+    <main className="ContactList">
       <div>
         <h2>Contacts</h2>
       </div>
@@ -71,19 +69,13 @@ const ContactList = () => {
           {
             filteredContacts.map((contact, id) => (
               <tr key={id}>
-                <td><img src={`/avatars/${contact.img}.png`} />{contact.name}</td>
+                <td><img src={`/avatars/${contact.img}.png`} /><span className="contact-name">{contact.name}</span></td>
                 <td>{contact.email}</td>
                 <td>{contact.phone}</td>
-                <td>
-                  <span>
-                    <button onClick={() => dispatch(addContactToFavorites({ id: contact.id, name: contact.name, email: contact.email, phone: contact.phone }))}><AiOutlineStar size={20} style={{color: isInFavorites(contact.id) ? 'yellow' : 'inherit'}}/></button>
-                  </span>
-                  <span>
-                    <button onClick={() => deleteHandler(contact.id)}><RiDeleteBin6Line size={20} /></button>
-                  </span>
-                  <span>
-                    <Link to={`/edit/${contact.id}`}><FiEdit2 size={20} /></Link>
-                  </span>
+                <td className="table-control">
+                    <button onClick={() => dispatch(addRemoveContactFromFavorites(contact.id))}><AiOutlineStar size={25} style={{color: isInFavorites(contact.id) ? 'red' : 'inherit'}}/></button>
+                    <button onClick={() => deleteHandler(contact.id)}><RiDeleteBin6Line size={25} /></button>
+                    <Link to={`/edit/${contact.id}`}><FiEdit2 size={25} /></Link>
                 </td>
               </tr>
             ))
@@ -91,7 +83,7 @@ const ContactList = () => {
         </tbody>
       </table>
       <ConfirmModal open={showModal} close={setShowModal} title="Delete contact" message="Are you sure you want to delete this contact?" callback={deleteModalCallBack} withIcon={true} />
-    </div>
+    </main>
   )
 }
 

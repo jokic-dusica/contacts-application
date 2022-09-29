@@ -3,19 +3,19 @@ import { createSlice, current } from '@reduxjs/toolkit'
 const initialState = {
     labels: [
         {
+            id: 1,
             label:"Work",
-            contactID:"1"
         },
         {
+            id:2,
+            label:"Friends",
+        },
+        {
+            id:3,
             label:"Family",
-            contactID:"2",
         },
-        {
-            contactID:"2",
-            label:"Friends"
-        },
-    ],
-};
+    ] 
+}
 
 export const labelSlice = createSlice({
     name: 'labels',

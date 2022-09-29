@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { MultiSelect } from "react-multi-select-component";
 
 import { addContact } from '../../redux/slices/contact';
 
@@ -8,14 +9,18 @@ import './CreateContact.scss';
 
 const CreateContact = () => {
 
+  const [selectedLabel, setSelectedLabel] = useState([]);
+  const { contacts } = useSelector((state) => state.contacts);
+  const { labels } = useSelector((state) => state.labels);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const id = Date.now()
+  const id = Date.now();
   const [formState, setFormState] = useState({
     id,
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    labels: []
   });
 
   const onChangeHandler = (e) => {
@@ -27,30 +32,28 @@ const CreateContact = () => {
     navigate('/')
   };
 
-  // const getBase64 = (file) => {
-  //   return new Promise((resolve,reject) => {
-  //      const reader = new FileReader();
-  //      reader.onload = () => resolve(reader.result);
-  //      reader.onerror = error => reject(error);
-  //      reader.readAsDataURL(file);
-  //   });
-  // }
+  useEffect(() => {
+    setFormState(prev => ({ ...prev, labels: selectedLabel.map((label, i) => label.label) }))
+  }, [selectedLabel])
 
-  // const imageUploadHandler = (e) => {
-  //   const file = e.target.files[0];
-  //   console.log("FIle",file)
-  //   getBase64(file).then(base64 => {
-  //     localStorage["fileBase64"] = base64;
-  //   });
-  // }
+
+  const options = labels.map((label, i) => (
+    { label: label.label, value: label.id }
+  ))
 
   return (
     <div className="Home CreateContact">
       <h2>Create Contact</h2>
       <div className="form-group">
         <label>Upload Photo</label>
-        {/* <input type="file" onChange={imageUploadHandler}/> */}
+        <input type="file" />
       </div>
+      <MultiSelect
+        options={options}
+        value={selectedLabel}
+        onChange={setSelectedLabel}
+        labelledBy="Select"
+      />
       <div className="form-group">
         <input type="text" placeholder="Name" className="form-control" value={formState.name} name="name" onChange={onChangeHandler} />
       </div>

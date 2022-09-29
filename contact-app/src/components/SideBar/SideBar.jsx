@@ -1,22 +1,37 @@
 import logo from '../../assets/logo.png'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 
 import { RiContactsLine } from 'react-icons/ri';
 import { AiOutlineStar, AiOutlinePlus } from 'react-icons/ai';
 
+import { createLabel } from '../../redux/slices/labels'
+
 import './SideBar.scss';
+import { useState } from 'react';
+import InputModal from '../InputModal/InputModal';
 
 const SideBar = () => {
 
-  const { contacts } = useSelector((state) => state.contacts);
-  const { favoritesContacts } = useSelector((state) => state.contacts);
+  const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
+  const { contacts, favoritesContacts } = useSelector((state) => state.contacts);
   const { labels } = useSelector((state) => state.labels);
-  console.log("Labels", Array.isArray(labels))
+
+  const createLabelHandler = () => {
+    setShowModal(true);
+  }
+
+  const createLabelCallBack = (label) => {
+    dispatch(createLabel({ id: Date.now(), label }))
+  }
+
+  const contactPerLabel = (label) => {
+    return contacts.filter(contact => contact.labels.includes(label)).length;
+  }
 
   return (
-    <nav className="SideBar">
-      <div className="wrapper">
+    <aside className="SideBar">
         <div>
           <div className="logoWrapper">
             <Link to="/" >
@@ -38,12 +53,13 @@ const SideBar = () => {
           <div>Labels</div>
           <ul>
             {labels.map((label, i) => (
-              <li key={"label" + i}>{label.label}</li>
+              <Link to={"/contactByLabel/"+label.label} key={"label" + i}><li>{label.label} {contactPerLabel(label.label)}</li></Link>
             ))}
           </ul>
+          <button onClick={() => createLabelHandler()}><AiOutlinePlus size={15} />Create Label</button>
         </div>
-      </div>
-    </nav>
+        <InputModal open={showModal} close={setShowModal} title="Create Label" callback={createLabelCallBack} />
+    </aside>
   )
 }
 

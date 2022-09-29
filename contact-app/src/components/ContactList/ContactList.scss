@@ -7,6 +7,32 @@
     box-shadow: 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
     border-radius: 8px;
 
+    thead {
+        background: #F9FAFB;
+
+        tr {
+
+            th {
+                padding: 10px 10px;
+                color: #6B7280;
+                text-transform: uppercase;
+            }
+
+            td {
+                padding: 15px 15px;
+                color: red;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            td {
+                padding: 10px 0px;
+            }
+        }
+    }
+
     button {
         background: none;
         border: none;
@@ -15,18 +41,9 @@
     span {
         padding: 10px 10px;
     }
-}
 
-.wrapperTable thead {
-    background: #F9FAFB;
-}
-
-.wrapperTable thead tr th {
-    padding: 10px 10px;
-    color: #6B7280;
-    text-transform: uppercase;
-}
-
-.wrapperTable tbody tr td {
-    padding: 15px 15px;
+    .table-control {
+        display: flex;
+        justify-content: space-around;
+    }
 }
