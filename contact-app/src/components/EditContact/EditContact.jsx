@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { MultiSelect } from 'react-multi-select-component';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
@@ -8,10 +9,12 @@ import './EditContact.scss';
 
 const EditContact = () => {
 
-  const { id, referer } = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [selectedLabel, setSelectedLabel] = useState([]);
   const { contacts } = useSelector(state => state.contacts);
+  const { labels } = useSelector((state) => state.labels);
   const editTarget = contacts.find(contact => contact.id === parseInt(id));
   const [formState, setFormState] = useState({
     id: "",
@@ -21,12 +24,23 @@ const EditContact = () => {
     labels: []
   });
 
+
   useEffect(() => {
     if (editTarget) {
       setFormState(editTarget)
+      const selectedLabels = labels.filter(label => editTarget.labels.includes(label.label))
+      const formated = selectedLabels.map((selLabel) => ({ label: selLabel.label, value: selLabel.id }))
+      setSelectedLabel(formated)
     }
-  }, [editTarget])
+  }, [])
 
+  useEffect(() => {
+    setFormState(prev => ({ ...prev, labels: selectedLabel.map((label, i) => label.label) }))
+  }, [selectedLabel])
+
+  const options = labels.map((label, i) => (
+    { label: label.label, value: label.id }
+  ))
 
   const onChangeHandler = (e) => {
     setFormState(currentState => ({ ...currentState, [e.target.name]: e.target.value }))
@@ -38,36 +52,43 @@ const EditContact = () => {
     navigate(-1)
   }
 
+  if (!editTarget) return (<h3>Contact with {id} id is not exist</h3>);
+  
   return (
-    <div className="Home EditContact">
-      {/* <div className="container">
-        <div className="row"> */}
-      {editTarget ? (
-        <div>
-          <h2>Edit Contact</h2>
-          <form>
-            <div className="form-group">
-              <label>Upload Photo</label>
+    <div className="EditContact">
+      <div>
+        <h2>Edit Contact</h2>
+        <div className="wrapper-contact">
+          <div className="wrapper-input">
+            <label>Photo</label>
+            <input type="file" />
+            <MultiSelect
+              options={options}
+              value={selectedLabel}
+              onChange={setSelectedLabel}
+              labelledBy="Select"
+            />
+          </div>
+          <div className="wrapper-form">
+            <div className="">
+              <label>Name</label>
+              <input type="text" name="name" value={formState.name} className="form-control" onChange={onChangeHandler} />
             </div>
-            <div className="form-group">
-              <input type="text" placeholder="Name" name="name" value={formState.name} className="form-control" onChange={onChangeHandler} />
+            <div className="">
+              <label>Email address</label>
+              <input type="text" name="email" value={formState.email} className="form-control" onChange={onChangeHandler} />
             </div>
-            <div className="form-group">
-              <input type="text" placeholder="Email address" name="email" value={formState.email} className="form-control" onChange={onChangeHandler} />
+            <div className="">
+              <label>Phone number</label>
+              <input type="number" name="phone" value={formState.phone} className="form-control" onChange={onChangeHandler} />
             </div>
-            <div className="form-group">
-              <input type="number" placeholder="Phone number" name="phone" value={formState.phone} className="form-control" onChange={onChangeHandler} />
-            </div>
-            <div>
+            <div className="button-wrapper">
               <Link to="/"><button className="cancelBtn">Cancel</button></Link>
               <button className="submitBtn" onClick={editedTarget}>Save</button>
             </div>
-          </form>
+          </div>
         </div>
-      ) : (<h3>Contact with {id} id is not exist</h3>)
-      }
-      {/* </div>
-      </div> */}
+      </div>
     </div>
   )
 }

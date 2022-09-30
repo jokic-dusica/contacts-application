@@ -8,7 +8,7 @@ const initialState = {
             email: "johndoe@gmail.com",
             phone: "9988998899",
             img: "1",
-            labels: ["Work"]
+            labels: ["Work","Friends"]
         },
         {
             id: 1,

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -6,16 +6,20 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import { AiOutlineStar } from 'react-icons/ai';
 import { FiEdit2 } from 'react-icons/fi';
 
+import { deleteContactFromFavorites } from '../../redux/slices/contact';
+
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 
-import { deleteContactFromFavorites } from '../../redux/slices/contact';
+import './FavoritesContactsList.scss';
 
 const FavoritesContactsList = () => {
 
   const dispatch = useDispatch();
   const [deletedID, setDeletedID] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const { favoritesContacts,contacts } = useSelector((state) => state.contacts);
+  const { favoritesContacts, contacts } = useSelector((state) => state.contacts);
+  const [filteredContacts, setFilteredContacts] = useState(favoritesContacts);
+  const { searchInput } = useSelector((state) => state.searchInput);
   const favoriteList = contacts.filter(contact => favoritesContacts.includes(contact.id));
 
   const deleteHandler = (id) => {
@@ -27,8 +31,31 @@ const FavoritesContactsList = () => {
     dispatch(deleteContactFromFavorites(deletedID))
   }
 
+  useEffect(() => {
+    setFilteredContacts(filteredContacts);
+  }, [filteredContacts])
+
+  useEffect(() => {
+    setFilteredContacts(favoriteList)
+  }, [favoritesContacts])
+
+  useEffect(() => {
+    if (searchInput.length === 0) {
+      setFilteredContacts(favoriteList);
+    }
+    else {
+      filteredUsers();
+    }
+  }, [searchInput])
+
+  const filteredUsers = () => {
+    setFilteredContacts(favoriteList.filter((user) =>
+      user.name.toLowerCase().includes(searchInput.toLowerCase()) || user.email.toLowerCase().includes(searchInput.toLowerCase()) || user.phone.toLowerCase().includes(searchInput.toLowerCase())
+    ))
+  }
+
   return (
-    <div className="ContactList">
+    <div className="FavoritesContactList">
       <div>
         <h2>Favorites</h2>
       </div>
@@ -43,17 +70,15 @@ const FavoritesContactsList = () => {
         </thead>
         <tbody>
           {
-            favoriteList.map((favContact, id) => (
+            filteredContacts.map((favContact, id) => (
               <tr key={id}>
-                <td><img src={`/avatars/${favContact.img}.png`} />{favContact.name}</td>
+                <td><img src={`/avatars/${favContact.img}.png`} /><span className="contact-name">{favContact.name}</span></td>
                 <td>{favContact.email}</td>
                 <td>{favContact.phone}</td>
-                <td>
-                  <span><button onClick={() => deleteHandler(favContact.id)}><AiOutlineStar style={{color:"red"}}/></button></span>
-                  <span><button onClick={() => deleteHandler(favContact.id)}><RiDeleteBin6Line size={20} /></button></span>
-                  <span>
-                    <Link to={`/edit/${favContact.id}`}><FiEdit2 size={20} /></Link>
-                  </span>
+                <td className="table-control">
+                  <button onClick={() => deleteHandler(favContact.id)}><AiOutlineStar size={25} style={{ color: "red" }} /></button>
+                  <button onClick={() => deleteHandler(favContact.id)}><RiDeleteBin6Line size={25} /></button>
+                  <Link to={`/edit/${favContact.id}`}><FiEdit2 size={25} /></Link>
                 </td>
               </tr>
             ))

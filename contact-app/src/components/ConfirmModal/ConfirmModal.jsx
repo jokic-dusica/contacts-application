@@ -22,7 +22,7 @@ const ConfirmModal = ({ open, close, title, message, callback, withIcon }) => {
             </div>
             <div className="buttonWrapper">
                 <button className="cancelBtn" onClick={handleNo}>Cancel</button>
-                <button className="saveBtn" onClick={handleYes}>Delete</button>
+                <button className="deleteBtn" onClick={handleYes}>Delete</button>
             </div>
         </div>
     )

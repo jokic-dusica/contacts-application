@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { RiContactsLine } from 'react-icons/ri';
 import { AiOutlineStar, AiOutlinePlus } from 'react-icons/ai';
+import {BiLabel} from 'react-icons/bi';
 
 import { createLabel } from '../../redux/slices/labels'
 
@@ -23,7 +24,7 @@ const SideBar = () => {
   }
 
   const createLabelCallBack = (label) => {
-    dispatch(createLabel({ id: Date.now(), label }))
+    dispatch(createLabel({ id: Date.now(), label }));
   }
 
   const contactPerLabel = (label) => {
@@ -53,7 +54,7 @@ const SideBar = () => {
           <div>Labels</div>
           <ul>
             {labels.map((label, i) => (
-              <Link to={"/contactByLabel/"+label.label} key={"label" + i}><li>{label.label} {contactPerLabel(label.label)}</li></Link>
+              <Link to={"/contactByLabel/"+label.label} key={"label" + i}><li><BiLabel size={20}/>{label.label} <span>{contactPerLabel(label.label)}</span></li></Link>
             ))}
           </ul>
           <button className="create-label-btn" onClick={() => createLabelHandler()}><AiOutlinePlus size={15} />Create Label</button>

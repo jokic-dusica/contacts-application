@@ -6,7 +6,7 @@ import { AiOutlineStar } from 'react-icons/ai';
 import { FiEdit2 } from 'react-icons/fi';
 
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
-import { deleteContact, addRemoveContactFromFavorites } from '../../redux/slices/contact'
+import { deleteContact, addRemoveContactFromFavorites,deleteContactFromFavorites } from '../../redux/slices/contact'
 
 import './ContactList.scss'
 
@@ -45,6 +45,7 @@ const ContactList = () => {
 
   const deleteModalCallBack = () => {
     dispatch(deleteContact(deletedID))
+    dispatch(deleteContactFromFavorites(deletedID))
   }
 
   const isInFavorites = (id) => {

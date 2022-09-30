@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import './InputModal.scss';
 
@@ -8,24 +8,25 @@ const InputModal = ({ open, close, title, callback }) => {
 
     const handleYes = () => {
         callback(label);
+        setLabel("");
         close(false)
     }
 
     const handleNo = () => {
         close(false)
     }
-
+    
     return (
         <div className="InputModal" hidden={!open}>
             <div className="textWrapper">
                 <h5>{title}</h5>
             </div>
-            <div>
-                <input type="text" onChange={(e) => setLabel(e.target.value)}/>
+            <div className='wrapper-input'>
+                <input type="text" onChange={(e) => setLabel(e.target.value)} value={label}/>
             </div>
             <div className="buttonWrapper">
                 <button className="cancelBtn" onClick={handleNo}>Cancel</button>
-                <button className="saveBtn" onClick={handleYes}>Save</button>
+                <button className="submitBtn" onClick={handleYes}>Save</button>
             </div>
         </div>
     )

@@ -35,37 +35,43 @@ const CreateContact = () => {
   useEffect(() => {
     setFormState(prev => ({ ...prev, labels: selectedLabel.map((label, i) => label.label) }))
   }, [selectedLabel])
-
-
+ 
   const options = labels.map((label, i) => (
     { label: label.label, value: label.id }
   ))
 
   return (
-    <div className="Home CreateContact">
+    <div className="CreateContact">
       <h2>Create Contact</h2>
-      <div className="form-group">
-        <label>Upload Photo</label>
-        <input type="file" />
-      </div>
-      <MultiSelect
-        options={options}
-        value={selectedLabel}
-        onChange={setSelectedLabel}
-        labelledBy="Select"
-      />
-      <div className="form-group">
-        <input type="text" placeholder="Name" className="form-control" value={formState.name} name="name" onChange={onChangeHandler} />
-      </div>
-      <div className="form-group">
-        <input type="text" placeholder="Email address" className="form-control" value={formState.email} name="email" onChange={onChangeHandler} />
-      </div>
-      <div className="form-group">
-        <input type="number" placeholder="Phone number" className="form-control" value={formState.phone} name="phone" onChange={onChangeHandler} />
-      </div>
-      <div className="form-group">
-        <Link to="/"><button className="cancelBtn">Cancel</button></Link>
-        <button className="submitBtn" onClick={createNewContact}>Create</button>
+      <div className="wrapper-contact">
+        <div className="wrapper-input">
+          <label>Photo</label>
+          <input type="file" />       
+          <MultiSelect
+            options={options}
+            value={selectedLabel}
+            onChange={setSelectedLabel}
+            labelledBy="Select"
+          />
+        </div>
+        <div className="wrapper-form">
+          <div className="">
+            <label>Name</label>
+            <input type="text" className="" value={formState.name} name="name" onChange={onChangeHandler} />
+          </div>
+          <div className="">
+            <label>Email address</label>
+            <input type="text" className="" value={formState.email} name="email" onChange={onChangeHandler} />
+          </div>
+          <div className="">
+            <label>Phone number</label>
+            <input type="number" className="" value={formState.phone} name="phone" onChange={onChangeHandler} />
+          </div>
+          <div className="button-wrapper">
+            <Link to="/"><button className="cancelBtn">Cancel</button></Link>
+            <button className="submitBtn" onClick={createNewContact}>Create</button>
+          </div>
+        </div>
       </div>
     </div>
   )

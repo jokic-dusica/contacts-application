@@ -31,7 +31,7 @@
 }
 
 .submitBtn {
-    padding: 10px 15px;
+    padding: 10px 20px;
     background-color: #4F46E5;
     font-size: 12px;
     display: inline-block;
@@ -92,4 +92,8 @@
 .create-label-btn {
     background: none;
     border: none;
+
+    svg {
+        margin: 10px;
+    }
 }

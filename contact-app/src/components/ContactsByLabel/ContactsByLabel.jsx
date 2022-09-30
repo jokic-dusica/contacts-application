@@ -19,13 +19,13 @@ const ContactsByLabel = () => {
       };
 
     const deleteHandler = (id) => {
-        setShowModal(true);
-      }
+      setShowModal(true);
+    }
 
     return (
         <main className="ContactList">
           <div>
-            <h2>Contacts</h2>
+            <h2>Contacts by Label</h2>
           </div>
           <table className="wrapperTable">
             <thead>
@@ -40,19 +40,13 @@ const ContactsByLabel = () => {
               {
                 contactPerLabel.map((contact, id) => (
                   <tr key={id}>
-                    <td><img src={`/avatars/${contact.img}.png`} />{contact.name}</td>
+                    <td><img src={`/avatars/${contact.img}.png`} /><span className="contact-name">{contact.name}</span></td>
                     <td>{contact.email}</td>
                     <td>{contact.phone}</td>
-                    <td>
-                      <span>
-                        <button onClick={() => dispatch(addRemoveContactFromFavorites(contact.id))}><AiOutlineStar size={25} style={{color: isInFavorites(contact.id) ? 'red' : 'inherit'}}/></button>
-                      </span>
-                      <span>
-                        <button onClick={() => deleteHandler(contact.id)}><RiDeleteBin6Line size={25} /></button>
-                      </span>
-                      <span>
-                        <Link to={`/edit/${contact.id}`}><FiEdit2 size={25} /></Link>
-                      </span>
+                    <td className="table-control">
+                      <button onClick={() => dispatch(addRemoveContactFromFavorites(contact.id))}><AiOutlineStar size={25} style={{color: isInFavorites(contact.id) ? 'red' : 'inherit'}}/></button>
+                      <button onClick={() => deleteHandler(contact.id)}><RiDeleteBin6Line size={25} /></button>
+                      <Link to={`/edit/${contact.id}`}><FiEdit2 size={25} /></Link>
                     </td>
                   </tr>
                 ))
