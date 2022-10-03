@@ -1,0 +1,14 @@
+.Header {
+    border-radius: 7px;
+    border-bottom: 1px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    padding: 0 10px 0 10px;
+
+    input {
+        border: none;
+        padding: 10px;
+        width: 100%;
+        outline: none;
+    }
+}
