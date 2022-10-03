@@ -83,8 +83,8 @@ const EditContact = () => {
               <input type="number" name="phone" value={formState.phone} className="form-control" onChange={onChangeHandler} />
             </div>
             <div className="button-wrapper">
-              <Link to="/"><button className="cancelBtn">Cancel</button></Link>
-              <button className="submitBtn" onClick={editedTarget}>Save</button>
+              <Link to="/"><button className="cancel-btn">Cancel</button></Link>
+              <button className="submit-btn" onClick={editedTarget}>Save</button>
             </div>
           </div>
         </div>

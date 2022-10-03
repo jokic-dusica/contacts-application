@@ -18,16 +18,16 @@ const ContactsByLabel = () => {
         return !!favoritesContacts.find(item => item.id === id);
       };
 
-    const deleteHandler = (id) => {
-      setShowModal(true);
-    }
+      const deleteHandler = (id) => {
+        setShowModal(true);
+      }
 
     return (
         <main className="ContactList">
           <div>
             <h2>Contacts by Label</h2>
           </div>
-          <table className="wrapperTable">
+          <table className="wrapper-table">
             <thead>
               <tr>
                 <th>Name</th>

@@ -34,19 +34,19 @@ const SideBar = () => {
   return (
     <aside className="SideBar">
         <div>
-          <div className="logoWrapper">
+          <div className="logo-wrapper">
             <Link to="/" >
               <img src={logo} alt='Not found' />
             </Link>
           </div>
-          <span className="mainTitle">Contacts</span>
+          <span className="main-title">Contacts</span>
         </div>
-        <div className="submitBtn">
+        <div className="submit-btn">
           <Link to="/add" className="">
             <span><AiOutlinePlus size={15} /></span>Create Contact
           </Link>
         </div>
-        <div className="sidebarMenu">
+        <div className="sidebar-menu">
           <ul>
             <Link to="/"><li><RiContactsLine size={18} /> Contacts <span>{contacts.length}</span></li></Link>
             <Link to="/favoritesContacts"><li><AiOutlineStar size={18} /> Favorites <span>{favoritesContacts.length}</span></li></Link>

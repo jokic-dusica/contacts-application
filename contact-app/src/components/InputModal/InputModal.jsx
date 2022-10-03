@@ -18,15 +18,15 @@ const InputModal = ({ open, close, title, callback }) => {
     
     return (
         <div className="InputModal" hidden={!open}>
-            <div className="textWrapper">
+            <div className="text-wrapper">
                 <h5>{title}</h5>
             </div>
             <div className='wrapper-input'>
                 <input type="text" onChange={(e) => setLabel(e.target.value)} value={label}/>
             </div>
-            <div className="buttonWrapper">
-                <button className="cancelBtn" onClick={handleNo}>Cancel</button>
-                <button className="submitBtn" onClick={handleYes}>Save</button>
+            <div className="button-wrapper">
+                <button className="cancel-btn" onClick={handleNo}>Cancel</button>
+                <button className="submit-btn" onClick={handleYes}>Save</button>
             </div>
         </div>
     )

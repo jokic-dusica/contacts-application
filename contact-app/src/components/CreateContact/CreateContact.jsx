@@ -35,7 +35,7 @@ const CreateContact = () => {
   useEffect(() => {
     setFormState(prev => ({ ...prev, labels: selectedLabel.map((label, i) => label.label) }))
   }, [selectedLabel])
- 
+
   const options = labels.map((label, i) => (
     { label: label.label, value: label.id }
   ))
@@ -46,7 +46,10 @@ const CreateContact = () => {
       <div className="wrapper-contact">
         <div className="wrapper-input">
           <label>Photo</label>
-          <input type="file" />       
+          <input type="file" id='image'
+            accept='.png, .jpg, .jpeg'
+            //onChange={changeHandler}
+            />       
           <MultiSelect
             options={options}
             value={selectedLabel}
@@ -68,8 +71,8 @@ const CreateContact = () => {
             <input type="number" className="" value={formState.phone} name="phone" onChange={onChangeHandler} />
           </div>
           <div className="button-wrapper">
-            <Link to="/"><button className="cancelBtn">Cancel</button></Link>
-            <button className="submitBtn" onClick={createNewContact}>Create</button>
+            <Link to="/"><button className="cancel-btn">Cancel</button></Link>
+            <button className="submit-btn" onClick={createNewContact}>Create</button>
           </div>
         </div>
       </div>

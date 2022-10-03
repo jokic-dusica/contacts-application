@@ -57,7 +57,7 @@ const ContactList = () => {
       <div>
         <h2>Contacts</h2>
       </div>
-      <table className="wrapperTable">
+      <table className="wrapper-table">
         <thead>
           <tr>
             <th>Name</th>

@@ -59,7 +59,7 @@ const FavoritesContactsList = () => {
       <div>
         <h2>Favorites</h2>
       </div>
-      <table className="wrapperTable">
+      <table className="wrapper-table">
         <thead>
           <tr>
             <th>Name</th>

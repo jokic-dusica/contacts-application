@@ -16,13 +16,13 @@ const ConfirmModal = ({ open, close, title, message, callback, withIcon }) => {
 
     return (
         <div className="ConfirmModal" hidden={!open}>
-            <div className="textWrapper">
+            <div className="text-wrapper">
                 <h5>{withIcon === true ? <span><ImWarning /></span> : ''}{title}</h5>
                 <p>{message}</p>
             </div>
-            <div className="buttonWrapper">
-                <button className="cancelBtn" onClick={handleNo}>Cancel</button>
-                <button className="deleteBtn" onClick={handleYes}>Delete</button>
+            <div className="button-wrapper">
+                <button className="cancel-btn" onClick={handleNo}>Cancel</button>
+                <button className="delete-btn" onClick={handleYes}>Delete</button>
             </div>
         </div>
     )
