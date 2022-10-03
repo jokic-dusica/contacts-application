@@ -23,32 +23,14 @@ const CreateContact = () => {
     email: '',
     phone: '',
     labels: [],
-    image:''
+    image: ''
   });
-
-  const onChangeHandler = (e) => {
-    setFormState(currentState => ({ ...currentState, [e.target.name]: e.target.value }))
-  };
-
-  const createNewContact = () => {
-    dispatch(addContact(formState));
-    navigate('/')
-  };
 
   useEffect(() => {
     setFormState(prev => ({ ...prev, labels: selectedLabel.map((label, i) => label.label) }))
   }, [selectedLabel])
 
-  const options = labels.map((label, i) => (
-    { label: label.label, value: label.id }
-  ))
-
-  const imageHandler = (e) => {
-    const file = e.target.files[0];
-    setFile(file);
-  }
-
-  useEffect(()=>{
+  useEffect(() => {
     let fileReader;
     if (file) {
       fileReader = new FileReader();
@@ -59,10 +41,28 @@ const CreateContact = () => {
         }
       }
       fileReader.readAsDataURL(file);
-      console.log({fileDataURL})
-      setFormState(prev => ({...prev,image:fileDataURL}))
+      console.log({ fileDataURL })
+      setFormState(prev => ({ ...prev, image: fileDataURL }))
     }
-  },[file])
+  }, [file])
+  
+  const createNewContact = () => {
+    dispatch(addContact(formState));
+    navigate('/')
+  };
+
+  const onChangeHandler = (e) => {
+    setFormState(currentState => ({ ...currentState, [e.target.name]: e.target.value }))
+  };
+  
+  const imageHandler = (e) => {
+    const file = e.target.files[0];
+    setFile(file);
+  }
+
+  const options = labels.map((label, i) => (
+    { label: label.label, value: label.id }
+  ))
 
   return (
     <div className="CreateContact">
@@ -70,9 +70,10 @@ const CreateContact = () => {
       <div className="wrapper-contact">
         <div className="wrapper-input">
           <label>Photo</label>
+          <div className="image-wrapper"><img src={fileDataURL}/></div>
           <input type="file"
             onChange={imageHandler}
-            />       
+          />
           <MultiSelect
             options={options}
             value={selectedLabel}

@@ -38,6 +38,15 @@
     }
 }
 
+.image-wrapper {
+    width: 100px;
+    height:100px;
+
+    img {
+        width: 100%;
+    }
+}
+
 .CreateContact {
     h2 {
         padding: 20px 20px;
