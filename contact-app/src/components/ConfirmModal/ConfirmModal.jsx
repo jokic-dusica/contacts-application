@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ImWarning } from 'react-icons/im';
 
 import './ConfirmModal.scss';

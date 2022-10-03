@@ -10,6 +10,8 @@ import './CreateContact.scss';
 const CreateContact = () => {
 
   const [selectedLabel, setSelectedLabel] = useState([]);
+  const [file, setFile] = useState(null);
+  const [fileDataURL, setFileDataURL] = useState(null);
   const { contacts } = useSelector((state) => state.contacts);
   const { labels } = useSelector((state) => state.labels);
   const navigate = useNavigate();
@@ -20,7 +22,8 @@ const CreateContact = () => {
     name: '',
     email: '',
     phone: '',
-    labels: []
+    labels: [],
+    image:''
   });
 
   const onChangeHandler = (e) => {
@@ -40,15 +43,35 @@ const CreateContact = () => {
     { label: label.label, value: label.id }
   ))
 
+  const imageHandler = (e) => {
+    const file = e.target.files[0];
+    setFile(file);
+  }
+
+  useEffect(()=>{
+    let fileReader;
+    if (file) {
+      fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        const { result } = e.target;
+        if (result) {
+          setFileDataURL(result);
+        }
+      }
+      fileReader.readAsDataURL(file);
+      console.log({fileDataURL})
+      setFormState(prev => ({...prev,image:fileDataURL}))
+    }
+  },[file])
+
   return (
     <div className="CreateContact">
       <h2>Create Contact</h2>
       <div className="wrapper-contact">
         <div className="wrapper-input">
           <label>Photo</label>
-          <input type="file" id='image'
-            accept='.png, .jpg, .jpeg'
-            //onChange={changeHandler}
+          <input type="file"
+            onChange={imageHandler}
             />       
           <MultiSelect
             options={options}
