@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { RiContactsLine } from 'react-icons/ri';
+import { RiContactsLine, RiDeleteBin6Line } from 'react-icons/ri';
 import { AiOutlineStar, AiOutlinePlus } from 'react-icons/ai';
 import { BiLabel } from 'react-icons/bi';
 
-import { createLabel } from '../../redux/slices/labels';
+import { createLabel, deleteLabel } from '../../redux/slices/labels';
 
 import InputModal from '../InputModal/InputModal';
 
@@ -53,9 +53,9 @@ const SideBar = () => {
           <Link to="/favoritesContacts"><li><AiOutlineStar size={18} /> Favorites <span>{favoritesContacts.length}</span></li></Link>
         </ul>
         <div>Labels</div>
-        <ul>
+        <ul className="wrapper-table-sidebar">
           {labels.map((label, i) => (
-            <Link to={"/contactByLabel/" + label.label} key={"label" + i}><li><BiLabel size={20} />{label.label} <span>{contactPerLabel(label.label)}</span></li></Link>
+            <Link to={"/contactByLabel/" + label.label} key={"label" + i}><li><BiLabel size={20} /><button onClick={() => dispatch(deleteLabel(label.id))}><RiDeleteBin6Line size={25} /></button>{label.label} <span>{contactPerLabel(label.label)}</span></li></Link>
           ))}
         </ul>
         <button className="create-label-btn" onClick={() => createLabelHandler()}><AiOutlinePlus size={15} />Create Label</button>

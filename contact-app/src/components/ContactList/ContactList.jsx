@@ -15,7 +15,7 @@ const ContactList = () => {
 
   const dispatch = useDispatch();
   const { searchInput } = useSelector((state) => state.searchInput);
-  const { contacts, favoritesContacts } = useSelector((state) => state.contacts);
+  const { contacts,favoritesContacts } = useSelector((state) => state.contacts);
   const [filteredContacts, setFilteredContacts] = useState(contacts);
   const [deletedID, setDeletedID] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -74,9 +74,9 @@ const ContactList = () => {
                 <td>{contact.email}</td>
                 <td>{contact.phone}</td>
                 <td className="table-control">
-                  <button onClick={() => dispatch(addRemoveContactFromFavorites(contact.id))}><AiOutlineStar size={25} style={{ color: isInFavorites(contact.id) ? 'red' : 'inherit' }} /></button>
-                  <button onClick={() => deleteHandler(contact.id)}><RiDeleteBin6Line size={25} /></button>
-                  <Link to={`/edit/${contact.id}`}><FiEdit2 size={25} /></Link>
+                    <button onClick={() => dispatch(addRemoveContactFromFavorites(contact.id))}><AiOutlineStar size={25} style={{color: isInFavorites(contact.id) ? 'red' : 'inherit'}}/></button>
+                    <button onClick={() => deleteHandler(contact.id)}><RiDeleteBin6Line size={25} /></button>
+                    <Link to={`/edit/${contact.id}`}><FiEdit2 size={25} /></Link>
                 </td>
               </tr>
             ))
