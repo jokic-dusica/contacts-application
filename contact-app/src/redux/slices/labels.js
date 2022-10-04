@@ -1,4 +1,4 @@
-import { createSlice, current } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     labels: [
@@ -27,6 +27,6 @@ export const labelSlice = createSlice({
     },
 })
 
-export const { createLabel } = labelSlice.actions
+export const { createLabel } = labelSlice.actions;
 
 export default labelSlice.reducer;

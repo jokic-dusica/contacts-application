@@ -6,7 +6,7 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import { AiOutlineStar } from 'react-icons/ai';
 import { FiEdit2 } from 'react-icons/fi';
 
-import { deleteContactFromFavorites } from '../../redux/slices/contact';
+import { deleteContact } from '../../redux/slices/contact';
 
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 
@@ -28,7 +28,7 @@ const FavoritesContactsList = () => {
   }
 
   const deleteModalCallBack = () => {
-    dispatch(deleteContactFromFavorites(deletedID))
+    dispatch(deleteContact(deletedID))
   }
 
   useEffect(() => {

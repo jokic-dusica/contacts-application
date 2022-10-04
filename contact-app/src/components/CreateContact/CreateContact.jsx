@@ -12,7 +12,6 @@ const CreateContact = () => {
   const [selectedLabel, setSelectedLabel] = useState([]);
   const [file, setFile] = useState(null);
   const [fileDataURL, setFileDataURL] = useState(null);
-  const { contacts } = useSelector((state) => state.contacts);
   const { labels } = useSelector((state) => state.labels);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -45,16 +44,16 @@ const CreateContact = () => {
       setFormState(prev => ({ ...prev, image: fileDataURL }))
     }
   }, [file])
-  
+
   const createNewContact = () => {
     dispatch(addContact(formState));
     navigate('/')
   };
 
   const onChangeHandler = (e) => {
-    setFormState(currentState => ({ ...currentState, [e.target.name]: e.target.value }))
+    setFormState(currentState => ({ ...currentState, [e.target.name]: e.target.value }));
   };
-  
+
   const imageHandler = (e) => {
     const file = e.target.files[0];
     setFile(file);
@@ -70,7 +69,7 @@ const CreateContact = () => {
       <div className="wrapper-contact">
         <div className="wrapper-input">
           <label>Photo</label>
-          <div className="image-wrapper"><img src={fileDataURL}/></div>
+          <div className="image-wrapper"><img src={fileDataURL} /></div>
           <input type="file"
             onChange={imageHandler}
           />
@@ -84,15 +83,15 @@ const CreateContact = () => {
         <div className="wrapper-form">
           <div className="">
             <label>Name</label>
-            <input type="text" className="" value={formState.name} name="name" onChange={onChangeHandler} />
+            <input type="text" value={formState.name} name="name" onChange={onChangeHandler} />
           </div>
           <div className="">
             <label>Email address</label>
-            <input type="text" className="" value={formState.email} name="email" onChange={onChangeHandler} />
+            <input type="text" value={formState.email} name="email" onChange={onChangeHandler} />
           </div>
           <div className="">
             <label>Phone number</label>
-            <input type="number" className="" value={formState.phone} name="phone" onChange={onChangeHandler} />
+            <input type="number" value={formState.phone} name="phone" onChange={onChangeHandler} />
           </div>
           <div className="button-wrapper">
             <Link to="/"><button className="cancel-btn">Cancel</button></Link>

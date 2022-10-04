@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { MultiSelect } from 'react-multi-select-component';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -32,15 +32,15 @@ const EditContact = () => {
       const formated = selectedLabels.map((selLabel) => ({ label: selLabel.label, value: selLabel.id }))
       setSelectedLabel(formated)
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     setFormState(prev => ({ ...prev, labels: selectedLabel.map((label, i) => label.label) }))
-  }, [selectedLabel])
+  }, [selectedLabel]);
 
   const options = labels.map((label, i) => (
     { label: label.label, value: label.id }
-  ))
+  ));
 
   const onChangeHandler = (e) => {
     setFormState(currentState => ({ ...currentState, [e.target.name]: e.target.value }))
@@ -50,10 +50,10 @@ const EditContact = () => {
     e.preventDefault();
     dispatch(editContact(formState));
     navigate(-1)
-  }
+  };
 
   if (!editTarget) return (<h3>Contact with {id} id is not exist</h3>);
-  
+
   return (
     <div className="EditContact">
       <div>
@@ -70,15 +70,15 @@ const EditContact = () => {
             />
           </div>
           <div className="wrapper-form">
-            <div className="">
+            <div>
               <label>Name</label>
               <input type="text" name="name" value={formState.name} className="form-control" onChange={onChangeHandler} />
             </div>
-            <div className="">
+            <div>
               <label>Email address</label>
               <input type="text" name="email" value={formState.email} className="form-control" onChange={onChangeHandler} />
             </div>
-            <div className="">
+            <div>
               <label>Phone number</label>
               <input type="number" name="phone" value={formState.phone} className="form-control" onChange={onChangeHandler} />
             </div>

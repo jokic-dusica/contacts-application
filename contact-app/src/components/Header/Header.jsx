@@ -13,7 +13,7 @@ const Header = () => {
 
     useEffect(() => {
         dispatch(setSearchInput(searchValue));
-    }, [searchValue])
+    }, [searchValue]);
 
     return (
         <header className="Header">

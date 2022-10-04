@@ -1,6 +1,6 @@
 import ContactList from '../ContactList/ContactList';
 
-import './Home.scss'
+import './Home.scss';
 
 const Home = () => {
   return (
