@@ -55,7 +55,7 @@ const SideBar = () => {
         <div>Labels</div>
         <ul className="wrapper-table-sidebar">
           {labels.map((label, i) => (
-            <Link to={"/contactByLabel/" + label.label} key={"label" + i}><li><BiLabel size={20} /><button onClick={() => dispatch(deleteLabel(label.id))}><RiDeleteBin6Line size={25} /></button>{label.label} <span>{contactPerLabel(label.label)}</span></li></Link>
+            <Link to={"/contactByLabel/" + label.label} key={"label" + i}><li><BiLabel size={20} /><button onClick={() => dispatch(deleteLabel(label.id))}><RiDeleteBin6Line size={20} /></button>{label.label} <span>{contactPerLabel(label.label)}</span></li></Link>
           ))}
         </ul>
         <button className="create-label-btn" onClick={() => createLabelHandler()}><AiOutlinePlus size={15} />Create Label</button>

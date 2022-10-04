@@ -9,12 +9,12 @@ import './CreateContact.scss';
 
 const CreateContact = () => {
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [selectedLabel, setSelectedLabel] = useState([]);
   const [file, setFile] = useState(null);
   const [fileDataURL, setFileDataURL] = useState(null);
   const { labels } = useSelector((state) => state.labels);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const id = Date.now();
   const [formState, setFormState] = useState({
     id,
@@ -68,7 +68,6 @@ const CreateContact = () => {
       <h2>Create Contact</h2>
       <div className="wrapper-contact">
         <div className="wrapper-input">
-          <label>Photo</label>
           <div className="image-wrapper"><img src={fileDataURL} /></div>
           <input type="file"
             onChange={imageHandler}
@@ -81,15 +80,15 @@ const CreateContact = () => {
           />
         </div>
         <div className="wrapper-form">
-          <div className="">
+          <div>
             <label>Name</label>
             <input type="text" value={formState.name} name="name" onChange={onChangeHandler} />
           </div>
-          <div className="">
+          <div>
             <label>Email address</label>
             <input type="text" value={formState.email} name="email" onChange={onChangeHandler} />
           </div>
-          <div className="">
+          <div>
             <label>Phone number</label>
             <input type="number" value={formState.phone} name="phone" onChange={onChangeHandler} />
           </div>

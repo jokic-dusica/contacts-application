@@ -11,14 +11,14 @@ import { addRemoveContactFromFavorites, removeLabelFromUser } from '../../redux/
 
 const ContactsByLabel = () => {
 
-  const [deletedID, setDeletedID] = useState("");
-  const { contacts, favoritesContacts } = useSelector((state) => state.contacts);
   const { label } = useParams();
   const dispatch = useDispatch();
+  const [deletedID, setDeletedID] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [filteredContactsPerLabel, setFilteredContactsPerLabel] = useState([]);
+  const { contacts, favoritesContacts } = useSelector((state) => state.contacts);
   const { searchInput } = useSelector((state) => state.searchInput);
   const contactPerLabel = contacts.filter(contact => contact.labels.includes(label));
-  const [filteredContactsPerLabel, setFilteredContactsPerLabel] = useState([]);
 
   useEffect(() => {
     if (searchInput.length === 0) {
@@ -33,7 +33,6 @@ const ContactsByLabel = () => {
     setFilteredContactsPerLabel(contacts.filter(contact => contact.labels.includes(label)))
   }, [contacts, label])
 
-
   const isInFavorites = (id) => {
     return favoritesContacts.includes(id);
   };
@@ -41,17 +40,17 @@ const ContactsByLabel = () => {
   const deleteHandler = (id) => {
     setDeletedID(id);
     setShowModal(true);
-  }
+  };
 
   const deleteModalCallBack = () => {
     dispatch(removeLabelFromUser({ id: deletedID, label: label }));
-  }
+  };
 
   const filteredUsers = () => {
     setFilteredContactsPerLabel(contactPerLabel.filter((user) =>
       user.name.toLowerCase().includes(searchInput.toLowerCase()) || user.email.toLowerCase().includes(searchInput.toLowerCase()) || user.phone.toLowerCase().includes(searchInput.toLowerCase())
     ))
-  }
+  };
 
   return (
     <main className="ContactList">
